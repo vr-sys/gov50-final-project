@@ -10,5 +10,39 @@ output:
 
 
 ## Project thoughts
+## New Research Question for Milestone 2
 
-I am interested in exploring data related to...
+
+Does opinion about the country's economic situation impact a willingness to accept cultural pluralism? 
+
+I hypothesize that higher citizen concern with the country's economic situation is connected to a negative impact on the citizens' opinions on cultural pluralism within the United States. Throughout history, acts of xenophia and hate have emerged from the scapegoating of different groups people for a country's problems, including financial crisis. I want to conduct a study that explores this relationship in the United States; I expect to see support for cultural pluralism decrease with concerns for the United States economic standing. 
+
+I will use a study conducted by Pew Research Center in 2021. The explanatory variable will be the answer to the following question:"Thinking about our economic situation, how would you describe the current economic situation in the U.S.? ... (1)Very Good, (2)Somewhat Good, (3)Somewhat Bad, (4) Very Bad. Higher numbers will be recorded as a less positive view of the country's economy. For my outcome variable I will be using the results from the following question: "Overall, do you think having people of many different backgrounds, such as different ethnic groups, religions and races, makes the U.S. ... (1) A better place to live, (2) A worse place to live." Answering "yes" (or recording a 1) to the question will be interpreted as a yes to cultural pluralism, and answering "no" (or recording a 2) will be considered a no.  
+
+If those who gave higher numbers for economic concern also answered no (or 2) for cultural pluralism more frequently - in other words, if these variables are positively correlated - we could see this as support for the hypothesis. However, if there is no correlation - or if those who expressed higher numbers of concern for the economy answered yes (or 1) more frequently - then the hypothesis would be wrong.
+politics$GAP21Q1_W82
+
+politics$GAP21Q20_W82
+
+
+
+
+
+```{r}
+library(tidyverse)
+library(haven)
+library(foreign)
+library(readxl)
+library(ggplot2)
+
+Foreign <- read_excel("Raw data for Table1--Foreign-born population, 1996 and 2008.xlsx")
+
+fpop <- Foreign|>
+  filter(year == 2008)|>
+  ggplot(data, mapping = aes(y=fct_reorder(state.name,pforeign), x=pforeign)) + 
+    geom_col(mapping = aes(fill = state.name)) + labs(title = "Percent of Foreign Born Population", color = "State",caption="Percentage of Foreign Population per State in 2008", x="Percentage of Foreign Born Residents", y="State")
+
+fpop
+
+```
+
