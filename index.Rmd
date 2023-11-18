@@ -37,12 +37,36 @@ library(ggplot2)
 
 Foreign <- read_excel("Raw data for Table1--Foreign-born population, 1996 and 2008.xlsx")
 
-fpop <- Foreign|>
-  filter(year == 2008)|>
-  ggplot(data, mapping = aes(y=fct_reorder(state.name,pforeign), x=pforeign)) + 
-    geom_col(mapping = aes(fill = state.name)) + labs(title = "Percent of Foreign Born Population", color = "State",caption="Percentage of Foreign Population per State in 2008", x="Percentage of Foreign Born Residents", y="State")
 
-fpop
+west <- c("Arizona", "California", "Colorado", "Idaho", "Montana", "Nevada", "New Mexico", "Oregon","Utah", "Washington", "Wyoming")
+
+
+fpop_2008 <- Foreign|>
+  filter(year == 2008, stname %in% west)
+
+fpop_2008_table <- fpop_2008|>
+  ggplot(data, mapping = aes(y=fct_reorder(stname,pforeign), x=pforeign)) + 
+    geom_col(mapping = aes(fill = stname)) + labs(title = "Percent of Foreign Born Population 2008", color = "State",caption="Percentage of Foreign Population per State in 2008", x="Percentage of Foreign Born Residents", y="State")
+
+fpop_2008_table
+
+fpop_1996 <- Foreign|>
+  filter(year == 1996, stname %in% west)
+
+fpop_1996_table <- fpop_1996|>
+  ggplot(data, mapping = aes(y=fct_reorder(stname,pforeign), x=pforeign)) + 
+    geom_col(mapping = aes(fill = stname)) + labs(title = "Percent of Foreign Born Population 1996", color = "State",caption="Percentage of Foreign Population per State in 1996", x="Percentage of Foreign Born Residents", y="State")
+
+fpop_1996_table
+
+
+```
+```{r}
+
+
+fpop_1996<- Foreign|>
+  filter(year == 1996)|>
+  select(pforeign, state)
 
 ```
 
