@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["FieldExp_Public.dta","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","Raw data for Table1--Foreign-born population, 1996 and 2008.xlsx"]}
+  {"type":"character","attributes":{},"value":["FieldExp_Public.dta","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","Raw data for Table1--Foreign-born population, 1996 and 2008.xlsx"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1519,13 +1519,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
 <h2 id="milestone-4-is-on-parental-discrimination-on-the-bottom-of-this-page.">Milestone 4 is on Parental Discrimination on the bottom of this page.</h2>
-<p>New Project Idea found at the bottom of this page</p>
-<p>Does opinion about the country’s economic situation impact a willingness to accept cultural pluralism?</p>
-<p>I hypothesize that higher citizen concern with the country’s economic situation is connected to a negative impact on the citizens’ opinions on cultural pluralism within the United States. Throughout history, acts of xenophia and hate have emerged from the scapegoating of different groups people for a country’s problems, including financial crisis. I want to conduct a study that explores this relationship in the United States; I expect to see support for cultural pluralism decrease with concerns for the United States economic standing.</p>
-<p>I will use a study conducted by Pew Research Center in 2021. The explanatory variable will be the answer to the following question:“Thinking about our economic situation, how would you describe the current economic situation in the U.S.? … (1)Very Good, (2)Somewhat Good, (3)Somewhat Bad, (4) Very Bad. Higher numbers will be recorded as a less positive view of the country’s economy. For my outcome variable I will be using the results from the following question:”Overall, do you think having people of many different backgrounds, such as different ethnic groups, religions and races, makes the U.S. … (1) A better place to live, (2) A worse place to live.” Answering “yes” (or recording a 1) to the question will be interpreted as a yes to cultural pluralism, and answering “no” (or recording a 2) will be considered a no.</p>
-<p>If those who gave higher numbers for economic concern also answered no (or 2) for cultural pluralism more frequently - in other words, if these variables are positively correlated - we could see this as support for the hypothesis. However, if there is no correlation - or if those who expressed higher numbers of concern for the economy answered yes (or 1) more frequently - then the hypothesis would be wrong.
-politics$GAP21Q1_W82</p>
-<p>politics$GAP21Q20_W82</p>
+<p>My new research question looks at the role of gender in parental discrimination. According to this barplot, mothers are less likely than fathers to receive a call back if their application signaled they were a mother. Within people who got a callback about 48.8% of them were mothers. In comparison, about 51.2% of them were fathers. Although this is not a huge difference, it prompts further study into what information this data has. I also plan to compare the number of callbacks between women and men as well as parents or non-parents to explain the data shown.</p>
+Parent vs. Non-Parent
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
@@ -1534,110 +1529,222 @@ politics$GAP21Q1_W82</p>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>Foreign</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/readxl/man/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='st'>"Raw data for Table1--Foreign-born population, 1996 and 2008.xlsx"</span><span class='op'>)</span></span>
+<span><span class='va'>jobs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://haven.tidyverse.org/reference/read_dta.html'>read_dta</a></span><span class='op'>(</span><span class='st'>"FieldExp_Public.dta"</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>parent <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>parent</span><span class='op'>==</span><span class='fl'>1</span>, <span class='st'>"Parent"</span>, <span class='st'>"Not Parent"</span><span class='op'>)</span>, callback <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>callback</span><span class='op'>==</span><span class='fl'>1</span>,<span class='st'>"Call back"</span>, <span class='st'>"No call back"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span></span>
-<span><span class='va'>west</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Arizona"</span>, <span class='st'>"California"</span>, <span class='st'>"Colorado"</span>, <span class='st'>"Idaho"</span>, <span class='st'>"Montana"</span>, <span class='st'>"Nevada"</span>, <span class='st'>"New Mexico"</span>, <span class='st'>"Oregon"</span>,<span class='st'>"Utah"</span>, <span class='st'>"Washington"</span>, <span class='st'>"Wyoming"</span><span class='op'>)</span></span>
+<span><span class='va'>parent_prop</span><span class='op'>&lt;-</span><span class='va'>jobs</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>parent</span>, <span class='va'>callback</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>prop<span class='op'>=</span><span class='va'>n</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
-<span></span>
-<span><span class='va'>fpop_2008</span> <span class='op'>&lt;-</span> <span class='va'>Foreign</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2008</span>, <span class='va'>stname</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>west</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>fpop_2008_table</span> <span class='op'>&lt;-</span> <span class='va'>fpop_2008</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>data</span>, mapping <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/forcats/man/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>stname</span>,<span class='va'>pforeign</span><span class='op'>)</span>, x<span class='op'>=</span><span class='va'>pforeign</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>stname</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Percent of Foreign Born Population 2008"</span>, color <span class='op'>=</span> <span class='st'>"State"</span>,caption<span class='op'>=</span><span class='st'>"Percentage of Foreign Population per State in 2008"</span>, x<span class='op'>=</span><span class='st'>"Percentage of Foreign Born Residents"</span>, y<span class='op'>=</span><span class='st'>"State"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>fpop_2008_table</span></span></code></pre>
+<span><span class='va'>parent_prop</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>parent</span>, y <span class='op'>=</span> <span class='va'>prop</span>, fill <span class='op'>=</span> <span class='va'>parent</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Parent"</span><span class='op'>=</span> <span class='st'>"steelblue1"</span>, <span class='st'>"Not Parent"</span> <span class='op'>=</span> <span class='st'>"indianred1"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Percentage of Callbacks"</span>, x <span class='op'>=</span> <span class='st'>"Parent"</span>, y<span class='op'>=</span><span class='st'>"Proportion of Calls Back"</span><span class='op'>)</span></span></code></pre>
 </div>
 <img src="index_files/figure-html5/unnamed-chunk-1-1.png" width="624" />
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fpop_1996</span> <span class='op'>&lt;-</span> <span class='va'>Foreign</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='fl'>1996</span>, <span class='va'>stname</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>west</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>fpop_1996_table</span> <span class='op'>&lt;-</span> <span class='va'>fpop_1996</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>data</span>, mapping <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/forcats/man/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>stname</span>,<span class='va'>pforeign</span><span class='op'>)</span>, x<span class='op'>=</span><span class='va'>pforeign</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
-<span>    <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_bar.html'>geom_col</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>stname</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Percent of Foreign Born Population 1996"</span>, color <span class='op'>=</span> <span class='st'>"State"</span>,caption<span class='op'>=</span><span class='st'>"Percentage of Foreign Population per State in 1996"</span>, x<span class='op'>=</span><span class='st'>"Percentage of Foreign Born Residents"</span>, y<span class='op'>=</span><span class='st'>"State"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>fpop_1996_table</span></span></code></pre>
-</div>
-<p><img src="index_files/figure-html5/unnamed-chunk-1-2.png" width="624" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://haven.tidyverse.org'>haven</a></span><span class='op'>)</span></span>
-<span><span class='va'>jobs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/haven/man/read_dta.html'>read_dta</a></span><span class='op'>(</span><span class='st'>"FieldExp_Public.dta"</span><span class='op'>)</span></span>
-<span></span>
-<span></span>
-<span><span class='va'>parent_jobs</span> <span class='op'>&lt;-</span> <span class='va'>jobs</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>parent</span><span class='op'>==</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/mutate.html'>mutate</a></span><span class='op'>(</span>parent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>woman</span><span class='op'>==</span><span class='fl'>1</span>, <span class='st'>"Mother"</span>, <span class='st'>"Father"</span><span class='op'>)</span>, callback <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>callback</span><span class='op'>==</span><span class='fl'>1</span>,<span class='st'>"Call back"</span>, <span class='st'>"No call back"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>parent_jobs</span></span></code></pre>
-</div>
-<pre><code># A tibble: 1,994 × 7
-      id callback     black     woman     parent msa        occupation
-   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl+lbl&gt; 
- 1     4 No call back 0 [White] 0 [Man]   Father Los Angel… 5 [Low Sk…
- 2     4 No call back 1 [Black] 1 [Woman] Mother Los Angel… 5 [Low Sk…
- 3    11 No call back 1 [Black] 1 [Woman] Mother Los Angel… 5 [Low Sk…
- 4    11 Call back    1 [Black] 0 [Man]   Father Los Angel… 5 [Low Sk…
- 5    13 No call back 0 [White] 1 [Woman] Mother Los Angel… 5 [Low Sk…
- 6    13 No call back 1 [Black] 1 [Woman] Mother Los Angel… 5 [Low Sk…
- 7    14 No call back 0 [White] 0 [Man]   Father Los Angel… 5 [Low Sk…
- 8    14 No call back 1 [Black] 1 [Woman] Mother Los Angel… 5 [Low Sk…
- 9    18 No call back 1 [Black] 1 [Woman] Mother Los Angel… 5 [Low Sk…
-10    18 No call back 1 [Black] 0 [Man]   Father Los Angel… 5 [Low Sk…
-# ℹ 1,984 more rows</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>parent_jobs_prop</span> <span class='op'>&lt;-</span> <span class='va'>parent_jobs</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>callback</span>, <span class='va'>parent</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/summarise.html'>summarize</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/mutate.html'>mutate</a></span><span class='op'>(</span>prop<span class='op'>=</span><span class='va'>n</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>n</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>parent_jobs_prop</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>parent_prop</span>,  caption <span class='op'>=</span> <span class='st'>"Percentage of Callbacks"</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Parent"</span>, <span class='st'>"Call Back Status"</span>, <span class='st'>"Total Number"</span>, <span class='st'>"Proportion"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
+<caption><span id="tab:unnamed-chunk-1">Table 1: </span>Percentage of Callbacks</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">callback</th>
-<th style="text-align: left;">parent</th>
-<th style="text-align: right;">prop</th>
+<th style="text-align: left;">Parent</th>
+<th style="text-align: left;">Call Back Status</th>
+<th style="text-align: right;">Total Number</th>
+<th style="text-align: right;">Proportion</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">Not Parent</td>
 <td style="text-align: left;">Call back</td>
-<td style="text-align: left;">Father</td>
-<td style="text-align: right;">0.5123457</td>
+<td style="text-align: right;">1585</td>
+<td style="text-align: right;">0.15</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Call back</td>
-<td style="text-align: left;">Mother</td>
-<td style="text-align: right;">0.4876543</td>
+<td style="text-align: left;">Not Parent</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">8745</td>
+<td style="text-align: right;">0.85</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">No call back</td>
-<td style="text-align: left;">Father</td>
-<td style="text-align: right;">0.4820359</td>
+<td style="text-align: left;">Parent</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">324</td>
+<td style="text-align: right;">0.16</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Parent</td>
 <td style="text-align: left;">No call back</td>
-<td style="text-align: left;">Mother</td>
-<td style="text-align: right;">0.5179641</td>
+<td style="text-align: right;">1670</td>
+<td style="text-align: right;">0.84</td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>Mother vs Woman</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>parent_jobs_prop</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>callback</span>, y <span class='op'>=</span> <span class='va'>prop</span>, fill <span class='op'>=</span> <span class='va'>parent</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Father"</span><span class='op'>=</span> <span class='st'>"steelblue1"</span>, <span class='st'>"Mother"</span> <span class='op'>=</span> <span class='st'>"indianred1"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Parents who received Callback"</span>, x<span class='op'>=</span><span class='st'>"Callback status"</span>, y<span class='op'>=</span><span class='st'>"Percentage"</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>mother_prop</span><span class='op'>&lt;-</span><span class='va'>jobs</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>woman</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>parent</span>, <span class='va'>callback</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>prop<span class='op'>=</span><span class='va'>n</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>mother_prop</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>parent</span>, y <span class='op'>=</span> <span class='va'>prop</span>, fill <span class='op'>=</span> <span class='va'>parent</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Parent"</span><span class='op'>=</span> <span class='st'>"steelblue1"</span>, <span class='st'>"Not Parent"</span> <span class='op'>=</span> <span class='st'>"indianred1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Percentage of Callbacks for Women"</span>, x <span class='op'>=</span> <span class='st'>"Parent"</span>, y<span class='op'>=</span><span class='st'>"Proportion of Calls Back"</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+<img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>mother_prop</span>, caption <span class='op'>=</span> <span class='st'>"Percentage of Callbacks for Women"</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Parent"</span>, <span class='st'>"Call Back Status"</span>, <span class='st'>"Total Number"</span>, <span class='st'>"Proportion"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
 </div>
-<p>My new research question looks at the role of gender in parental discrimination. According to this barplot, mothers are less likely than fathers to receive a call back if their application signaled they were a mother. Within people who got a callback about 48.8% of them were mothers. In comparison, about 51.2% of them were fathers. Although this is not a huge difference, it prompts further study into what information this data has. I also plan to compare the number of callbacks between women and men as well as parents or non-parents to explain the data shown.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 2: </span>Percentage of Callbacks for Women</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parent</th>
+<th style="text-align: left;">Call Back Status</th>
+<th style="text-align: right;">Total Number</th>
+<th style="text-align: right;">Proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Not Parent</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">836</td>
+<td style="text-align: right;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Not Parent</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">4355</td>
+<td style="text-align: right;">0.84</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parent</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parent</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">865</td>
+<td style="text-align: right;">0.85</td>
+</tr>
+</tbody>
+</table>
+</div>
+Father vs Man
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>father_prop</span><span class='op'>&lt;-</span><span class='va'>jobs</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>woman</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>parent</span>, <span class='va'>callback</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>prop<span class='op'>=</span><span class='va'>n</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>father_prop</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>parent</span>, y <span class='op'>=</span> <span class='va'>prop</span>, fill <span class='op'>=</span> <span class='va'>parent</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Parent"</span><span class='op'>=</span> <span class='st'>"steelblue1"</span>, <span class='st'>"Not Parent"</span> <span class='op'>=</span> <span class='st'>"indianred1"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Percentage of Callbacks for Men"</span>, x <span class='op'>=</span> <span class='st'>"Parent"</span>, y<span class='op'>=</span><span class='st'>"Proportion of Calls Back"</span><span class='op'>)</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>father_prop</span>, caption <span class='op'>=</span> <span class='st'>"Percentage of Callbacks for Men"</span>,col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Parent"</span>,<span class='st'>"Call Back Status"</span>,  <span class='st'>"Total Number"</span>, <span class='st'>"Proportion"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 3: </span>Percentage of Callbacks for Men</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parent</th>
+<th style="text-align: left;">Call Back Status</th>
+<th style="text-align: right;">Total Number</th>
+<th style="text-align: right;">Proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Not Parent</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">749</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Not Parent</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">4390</td>
+<td style="text-align: right;">0.85</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Parent</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">0.17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parent</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">805</td>
+<td style="text-align: right;">0.83</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>women_prop</span><span class='op'>&lt;-</span><span class='va'>jobs</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>women <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>woman</span><span class='op'>==</span><span class='fl'>1</span>, <span class='st'>"Woman"</span>, <span class='st'>"Man"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>women</span>, <span class='va'>callback</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>prop<span class='op'>=</span><span class='va'>n</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>women_prop</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>women</span>, y <span class='op'>=</span> <span class='va'>prop</span>, fill <span class='op'>=</span> <span class='va'>women</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Woman"</span><span class='op'>=</span> <span class='st'>"steelblue1"</span>, <span class='st'>"Man"</span> <span class='op'>=</span> <span class='st'>"indianred1"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Percentage of Callbacks"</span>, x <span class='op'>=</span> <span class='st'>"Gender"</span>, y<span class='op'>=</span><span class='st'>"Proportion of Calls Back"</span><span class='op'>)</span></span></code></pre>
+</div>
+<img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>women_prop</span>,  caption <span class='op'>=</span> <span class='st'>"Percentage of Callbacks for Women"</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Gender"</span>,<span class='st'>"Call Back Status"</span>,  <span class='st'>"Total Number"</span>, <span class='st'>"Proportion"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 4: </span>Percentage of Callbacks for Women</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Gender</th>
+<th style="text-align: left;">Call Back Status</th>
+<th style="text-align: right;">Total Number</th>
+<th style="text-align: right;">Proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Man</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">915</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Man</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">5195</td>
+<td style="text-align: right;">0.85</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Woman</td>
+<td style="text-align: left;">Call back</td>
+<td style="text-align: right;">994</td>
+<td style="text-align: right;">0.16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Woman</td>
+<td style="text-align: left;">No call back</td>
+<td style="text-align: right;">5220</td>
+<td style="text-align: right;">0.84</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

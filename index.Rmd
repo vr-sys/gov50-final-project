@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Veronica Ruiz"
-description: "My final project"
+description: "Final Project on Parental Discrimination in Hiring"
 output:
   distill::distill_article:
     self_contained: false
@@ -9,64 +9,123 @@ output:
 
 
 
-## Project thoughts
-## New Research Question for Milestone 2
+## Parental Discrimination
+## By Veronica Ruiz
+
+Introduction
+Does being a parent hurt an applicant's probability of being hired? I hypothesize that being a parent can negatively affect an individual's chances of receiving a call back in the hiring process. Many occupations demand a large amount of time from their employees and prefer to hire individuals who can fully commit to their responsibilities. Stereotypical views of parenthood could have an effect on the hiring process. Since raising children is a life commitment - many occupations may have the view that individuals with children would be more unreliable and require more benefits - leading to an aversion to hiring parents. I also would like to see the difference across different genders to see if women - who are usually ascribed the role of primary caretaker - experience more discrimination as mothers than men as fathers.  
+This type of hiring discrimination - if it is actually occuring - could harm many families and communities economically.
 
 
-Does opinion about the country's economic situation impact a willingness to accept cultural pluralism? 
+Data
 
-I hypothesize that higher citizen concern with the country's economic situation is connected to a negative impact on the citizens' opinions on cultural pluralism within the United States. Throughout history, acts of xenophia and hate have emerged from the scapegoating of different groups people for a country's problems, including financial crisis. I want to conduct a study that explores this relationship in the United States; I expect to see support for cultural pluralism decrease with concerns for the United States economic standing. 
+The data for this research is from a cross sectional study found here(https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/4TTCEY).
 
-I will use a study conducted by Pew Research Center in 2021. The explanatory variable will be the answer to the following question:"Thinking about our economic situation, how would you describe the current economic situation in the U.S.? ... (1)Very Good, (2)Somewhat Good, (3)Somewhat Bad, (4) Very Bad. Higher numbers will be recorded as a less positive view of the country's economy. For my outcome variable I will be using the results from the following question: "Overall, do you think having people of many different backgrounds, such as different ethnic groups, religions and races, makes the U.S. ... (1) A better place to live, (2) A worse place to live." Answering "yes" (or recording a 1) to the question will be interpreted as a yes to cultural pluralism, and answering "no" (or recording a 2) will be considered a no.  
+The explanatory variable will be parent's gender and parental status. Parental status is measured as variable parent in this study and assigns a 0 to applicants without children and a 1 to individuals with children. The applications in the study signify if the applicant has children by mentioning children in their hobbies or by listing the PTA as one of their volunteering experiences. The outcome variable will be the proportion of call backs from each group. Whether or not an applicant has received a callback is found in the variable callback that assigns 0 to applicants who did not receive a callback and a 1 to those who did. Below we can see the outcome variable (the proportion of calls back) for all applicants.
 
-If those who gave higher numbers for economic concern also answered no (or 2) for cultural pluralism more frequently - in other words, if these variables are positively correlated - we could see this as support for the hypothesis. However, if there is no correlation - or if those who expressed higher numbers of concern for the economy answered yes (or 1) more frequently - then the hypothesis would be wrong.
-politics$GAP21Q1_W82
-
-politics$GAP21Q20_W82
-
-
-
-
+If the proportion of parents who received a callback is smaller than the proportion of non-parents that received a callback then we would see data that supported the thesis on parental discrimination. However if there is little to no difference in proportion then we could have evidence to disprove the hypothesis.
 
 ```{r}
+
 library(tidyverse)
 library(haven)
 library(foreign)
 library(readxl)
 library(ggplot2)
 
-Foreign <- read_excel("Raw data for Table1--Foreign-born population, 1996 and 2008.xlsx")
+jobs1 <- read_dta("FieldExp_Public.dta")|>
+  drop_na()
+
+jobs <- read_dta("FieldExp_Public.dta")|>
+  drop_na()|>
+  mutate(parent = if_else(parent==1, "Parent", "Not Parent"), callback =                 if_else(callback==1,"Call back", "No call back"))
 
 
-west <- c("Arizona", "California", "Colorado", "Idaho", "Montana", "Nevada", "New Mexico", "Oregon","Utah", "Washington", "Wyoming")
+prop<-jobs|>
+  group_by(callback)|>
+  summarize(n=n())|>
+  mutate(prop=n/sum(n))
 
+prop|>
+  ggplot(aes(x = callback, y = prop, fill = callback)) + geom_col(position = "dodge") +   scale_fill_manual(values = c("Call back"= "green", "No call back" = "red")) +        labs(title="Overall Calls Back", x = "Status", y="Proportions")
 
-fpop_2008 <- Foreign|>
-  filter(year == 2008, stname %in% west)
-
-fpop_2008_table <- fpop_2008|>
-  ggplot(data, mapping = aes(y=fct_reorder(stname,pforeign), x=pforeign)) + 
-    geom_col(mapping = aes(fill = stname)) + labs(title = "Percent of Foreign Born Population 2008", color = "State",caption="Percentage of Foreign Population per State in 2008", x="Percentage of Foreign Born Residents", y="State")
-
-fpop_2008_table
-
-fpop_1996 <- Foreign|>
-  filter(year == 1996, stname %in% west)
-
-fpop_1996_table <- fpop_1996|>
-  ggplot(data, mapping = aes(y=fct_reorder(stname,pforeign), x=pforeign)) + 
-    geom_col(mapping = aes(fill = stname)) + labs(title = "Percent of Foreign Born Population 1996", color = "State",caption="Percentage of Foreign Population per State in 1996", x="Percentage of Foreign Born Residents", y="State")
-
-fpop_1996_table
-
-
+knitr::kable(prop, caption = "Proportion of Callbacks", col.names = c("Call Back Status", "Total Number", "Proportion"), digits = 2)
 ```
+
+
+
+Results
+
+
+
+
+According to this barplot, mothers are less likely than fathers to receive a call back if their application signaled they were a mother. Within people who got a callback about 48.8% of them were mothers. In comparison, about 51.2% of them were fathers. Although this is not a huge difference, it prompts further study into what information this data has. I also plan to compare the number of callbacks between women and men as well as parents or non-parents to explain the data shown.
+
+
 ```{r}
 
+parent_prop<-jobs|>
+  group_by(parent, callback)|>
+  summarize(n=n())|>
+  mutate(prop=n/sum(n))
 
-fpop_1996<- Foreign|>
-  filter(year == 1996)|>
-  select(pforeign, state)
+parent_prop|>
+  ggplot(aes(x = parent, y = prop, fill = parent)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Percentage of Callbacks between Parents and Non-Parents", x = "Parental Status", y="Proportion of Calls Back")
+
+knitr::kable(parent_prop,  caption = "Proportion of Callbacks between Parents & Non-Parents", col.names = c("Parental Status", "Call Back Status", "Total Number", "Proportion"), digits = 2)
+
+
+fit <- lm(callback ~ parent, data = jobs1)
+
+fit
+
+
 
 ```
+
+
+Mother vs Woman
+
+```{r}
+mother_prop<-jobs|>
+  filter(woman == 1)|>
+  group_by(parent, callback)|>
+  summarize(n=n())|>
+  mutate(prop=n/sum(n))
+
+mother_prop|>
+  ggplot(aes(x = parent, y = prop, fill = parent)) + geom_col(position = "dodge") +      scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1"))+    labs(title="Proportion of Callbacks for Women", x = "Parent", y="Proportion of Calls Back")
+
+
+knitr::kable(mother_prop, caption = "Proportion of Callbacks for Women", col.names = c("Parental Status", "Call Back Status", "Total Number", "Proportion"), digits = 2)
+```
+
+Father vs Man
+```{r}
+father_prop<-jobs|>
+  filter(woman == 0)|>
+  group_by(parent, callback)|>
+  summarize(n=n())|>
+  mutate(prop=n/sum(n))
+
+father_prop|>
+  ggplot(aes(x = parent, y = prop, fill = parent)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Proportion of Callbacks for Men", x = "Parent", y="Proportion of Calls Back")
+
+knitr::kable(father_prop, caption = "Proportion of Callbacks for Men",col.names = c("Parental Status","Call Back Status",  "Total Number", "Proportion"), digits = 2)
+```
+
+```{r}
+women_prop<-jobs|>
+  mutate(Gender = if_else(woman==1, "Woman", "Man"))|>
+  group_by(Gender, callback)|>
+  summarize(n=n())|>
+  mutate(prop=n/sum(n))
+
+women_prop|>
+  ggplot(aes(x = Gender, y = prop, fill = Gender)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Woman"= "steelblue1", "Man" = "indianred1")) + labs(title="Proportion of Callbacks between Genders", x = "Gender", y="Proportion of Calls Back")
+
+knitr::kable(women_prop,  caption = "Proportion of Callbacks between Gender", col.names = c("Gender","Call Back Status",  "Total Number", "Proportion"), digits = 2)
+```
+
+
 
