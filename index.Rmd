@@ -9,21 +9,20 @@ output:
 
 
 
-## Parental Discrimination
-## By Veronica Ruiz
+## Parental Discrimination in the Hiring Process
 
-Introduction
-Does being a parent hurt an applicant's probability of being hired? I hypothesize that being a parent can negatively affect an individual's chances of receiving a call back in the hiring process. Many occupations demand a large amount of time from their employees and prefer to hire individuals who can fully commit to their responsibilities. Stereotypical views of parenthood could have an effect on the hiring process. Since raising children is a life commitment - many occupations may have the view that individuals with children would be more unreliable and require more benefits - leading to an aversion to hiring parents. I also would like to see the difference across different genders to see if women - who are usually ascribed the role of primary caretaker - experience more discrimination as mothers than men as fathers.  
-This type of hiring discrimination - if it is actually occuring - could harm many families and communities economically.
+### Introduction
+
+Does being a parent hurt an applicant's probability of being hired? I hypothesize that being a parent can negatively affect an individual's chances of receiving a call back in the hiring process. Many occupations demand a large amount of time from their employees and prefer to hire individuals who can fully commit to their responsibilities. Stereotypical views of parenthood could have an effect on the hiring process. Since raising children is a life commitment - many occupations may have the view that individuals with children would be more unreliable and require more benefits - leading to an aversion to hiring parents. I also would like to see the difference across different genders to see if women - who are usually ascribed the role of primary caretaker - experience more discrimination as mothers than men as fathers. This type of hiring discrimination - if it is actually occuring - could harm many families and communities economically.
 
 
-Data
+### Data
 
-The data for this research is from a cross sectional study found here(https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/4TTCEY).
-
-The explanatory variable will be parent's gender and parental status. Parental status is measured as variable parent in this study and assigns a 0 to applicants without children and a 1 to individuals with children. The applications in the study signify if the applicant has children by mentioning children in their hobbies or by listing the PTA as one of their volunteering experiences. The outcome variable will be the proportion of call backs from each group. Whether or not an applicant has received a callback is found in the variable callback that assigns 0 to applicants who did not receive a callback and a 1 to those who did. Below we can see the outcome variable (the proportion of calls back) for all applicants.
-
-If the proportion of parents who received a callback is smaller than the proportion of non-parents that received a callback then we would see data that supported the thesis on parental discrimination. However if there is little to no difference in proportion then we could have evidence to disprove the hypothesis.
+The data for this research is from a cross sectional study found here(https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/4TTCEY).The explanatory variables will be gender and parental status. Parental status is measured as variable `parent` in this study and assigns a 0 to applicants without children and a 1 to individuals with children. The applications in the study signify if the applicant has children by mentioning children in their hobbies or by listing the PTA as one of their volunteering experiences. The outcome variable will be the proportion of call backs from each group. Whether or not an applicant has received a callback is found in the variable `callback` that assigns 0 to applicants who did not receive a callback and a 1 to those who did.
+<br>
+If the proportion of parents who received a callback is smaller than the proportion of non-parents that received a callback then we would see data that supported the hypothesis on parental discrimination. However, if there is little to no difference in proportion then we could have evidence to disprove the hypothesis.
+<br>
+ Below we can see the outcome variable (the proportion of calls back) for all applicants.
 
 ```{r}
 
@@ -38,29 +37,49 @@ jobs1 <- read_dta("FieldExp_Public.dta")|>
 
 jobs <- read_dta("FieldExp_Public.dta")|>
   drop_na()|>
-  mutate(parent = if_else(parent==1, "Parent", "Not Parent"), callback =                 if_else(callback==1,"Call back", "No call back"))
+  mutate(parent = if_else(parent==1, "Parent", "Not Parent"), callback = if_else(callback==1,"Call back", "No call back"))
 
-
+```
+<br>
+<br>
+```{r}
 prop<-jobs|>
   group_by(callback)|>
   summarize(n=n())|>
   mutate(prop=n/sum(n))
 
 prop|>
-  ggplot(aes(x = callback, y = prop, fill = callback)) + geom_col(position = "dodge") +   scale_fill_manual(values = c("Call back"= "green", "No call back" = "red")) +        labs(title="Overall Calls Back", x = "Status", y="Proportions")
+  ggplot(aes(x = callback, y = prop, fill = callback)) + geom_col(position = "dodge") +   scale_fill_manual(values = c("Call back"= "green", "No call back" = "red")) + labs(title="Overall Calls Back", x = "Status", y="Proportions")
+
+
+```
+<br>
+<br>
+```{r}
 
 knitr::kable(prop, caption = "Proportion of Callbacks", col.names = c("Call Back Status", "Total Number", "Proportion"), digits = 2)
 ```
+<br>
+<br>
 
+### Results
+According to the regression output below, parents are .009051 percentage points more likely to receive a call back compared to non-parents. However, this number is very small and not statistically significant at a .05 alpha level. When controlling for gender we can see that parents are 0.008944009 percentage points more likely to receive a call back than non-parents. Although, these numbers are very small they are statistically significant at a .05 alpha level. However, it is also important to note that since our outcome variable is a binary categorical variable a linear regression model would not be the best fit for this data. To further visualize this data I will create several barplots to compare proportions across various groups.
 
+```{r}
+fit <- lm(formula = callback ~ parent, data = jobs1)
 
-Results
+fit2 <- lm(formula = callback ~ parent + woman, data = jobs1)
 
+fit
+summary(fit)$coef
 
+fit2
+summary(fit2)$coef
 
+```
 
-According to this barplot, mothers are less likely than fathers to receive a call back if their application signaled they were a mother. Within people who got a callback about 48.8% of them were mothers. In comparison, about 51.2% of them were fathers. Although this is not a huge difference, it prompts further study into what information this data has. I also plan to compare the number of callbacks between women and men as well as parents or non-parents to explain the data shown.
-
+Parents vs Non Parents<br>
+According to this barplot, the proportion of parents receiving calls back is fairly equal between parents and non-parents with 16% of parents receiving a callback compared to about 15% of non-parents. This provides evidence against our hypothesis, however, it is important to consider other factors - such as differences between mothers and fathers within the parents group.
 
 ```{r}
 
@@ -70,21 +89,22 @@ parent_prop<-jobs|>
   mutate(prop=n/sum(n))
 
 parent_prop|>
-  ggplot(aes(x = parent, y = prop, fill = parent)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Percentage of Callbacks between Parents and Non-Parents", x = "Parental Status", y="Proportion of Calls Back")
+  ggplot(aes(x = callback, y = prop, fill = parent)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Percentage of Callbacks between Parents and Non-Parents", x = "Call Back Status", y="Proportion of Calls Back")
+
+```
+<br>
+<br>
+```{r} 
 
 knitr::kable(parent_prop,  caption = "Proportion of Callbacks between Parents & Non-Parents", col.names = c("Parental Status", "Call Back Status", "Total Number", "Proportion"), digits = 2)
 
-
-fit <- lm(callback ~ parent, data = jobs1)
-
-fit
-
-
-
 ```
 
+<br>
+<br>
 
-Mother vs Woman
+Mothers vs Women without Children<br>
+According to this barplot, the proportion of women receiving calls back is again fairly equal between parents and non-parents with 15% of parents receiving a callback compared to about 16% of non-parents. However, there is a slight change where the proportion of mothers receiving a call back is slightly less than women without children. However, no drastic changes are observed.
 
 ```{r}
 mother_prop<-jobs|>
@@ -94,13 +114,19 @@ mother_prop<-jobs|>
   mutate(prop=n/sum(n))
 
 mother_prop|>
-  ggplot(aes(x = parent, y = prop, fill = parent)) + geom_col(position = "dodge") +      scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1"))+    labs(title="Proportion of Callbacks for Women", x = "Parent", y="Proportion of Calls Back")
-
-
+  ggplot(aes(x = callback, y = prop, fill = parent)) + geom_col(position = "dodge") +      scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Proportion of Callbacks for Women", x = "Call Back Status", y="Proportion of Calls Back")
+```
+<br>
+<br>
+```{r}
 knitr::kable(mother_prop, caption = "Proportion of Callbacks for Women", col.names = c("Parental Status", "Call Back Status", "Total Number", "Proportion"), digits = 2)
 ```
+<br>
+<br>
+Fathers vs Men without Children<br>
+This visualization shows that the proportion of men receiving calls back is similar between parents and non-parents with 17% of parents receiving a callback compared to about 15% of non-parents. Interestingly, the opposite effect to that of women is seen here. The proportion of men who receive a callback is actually higher if they have children than if they didn't. However, these changes are still very small.
 
-Father vs Man
+
 ```{r}
 father_prop<-jobs|>
   filter(woman == 0)|>
@@ -109,10 +135,18 @@ father_prop<-jobs|>
   mutate(prop=n/sum(n))
 
 father_prop|>
-  ggplot(aes(x = parent, y = prop, fill = parent)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Proportion of Callbacks for Men", x = "Parent", y="Proportion of Calls Back")
+  ggplot(aes(x = callback, y = prop, fill = parent)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Parent"= "steelblue1", "Not Parent" = "indianred1")) + labs(title="Proportion of Callbacks for Men", x = "Call Back Status", y="Proportion of Calls Back")
+```
+<br>
+<br>
+```{r}
 
 knitr::kable(father_prop, caption = "Proportion of Callbacks for Men",col.names = c("Parental Status","Call Back Status",  "Total Number", "Proportion"), digits = 2)
 ```
+<br>
+<br>
+Gender Differences<br>
+In order to account for a possible confounder, this plot visualizes the proportion of men receiving a call back vs women receiving a call back in case there were any significant differences among gender. However, these proportions are also fairly even with 16% of women receiving a call back and 15% of men having a call back.
 
 ```{r}
 women_prop<-jobs|>
@@ -122,10 +156,22 @@ women_prop<-jobs|>
   mutate(prop=n/sum(n))
 
 women_prop|>
-  ggplot(aes(x = Gender, y = prop, fill = Gender)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Woman"= "steelblue1", "Man" = "indianred1")) + labs(title="Proportion of Callbacks between Genders", x = "Gender", y="Proportion of Calls Back")
+  ggplot(aes(x = callback, y = prop, fill = Gender)) + geom_col(position = "dodge") + scale_fill_manual(values = c("Woman"= "steelblue1", "Man" = "indianred1")) + labs(title="Proportion of Callbacks between Genders", x = "Call Back Status", y="Proportion of Calls Back")
+
+```
+<br>
+<br>
+```{r}
 
 knitr::kable(women_prop,  caption = "Proportion of Callbacks between Gender", col.names = c("Gender","Call Back Status",  "Total Number", "Proportion"), digits = 2)
 ```
+<br>
+<br>
 
 
 
+### Conclusion
+Overall, my results did not support my hypothesis about parental discrimination since the proportion of applications that received a call back were largely consistent across various groups. However, it is important to note that the type of job that's hiring could be confounding variable - jobs with higher time commitments may be more selective and also prefer to hire individuals who have no large commitments like children. The race of the applicant could also have an impact as well as the geography of the city. If I had the data and time available, I would be interested to see the difference of parental discrimination between men and women across time and geography. For example comparing the proportion of calls back between mothers and fathers in 1995 vs 2022 or in a small Illinois town vs New York City. 
+<br>
+<br>
+However, since the numbers were so similar, I believe that the best way to test this experiment would be to focus on less explicit forms of discrimination such as promotions, sick time, and paid leave among just parents in the workforce to see if motherhood and fatherhood are treated differently in a professional setting. While the information found in the above charts may not be successful to supporting the original hypothesis, it provides a good starting point that can lead to designing better and more efficient studies. 
